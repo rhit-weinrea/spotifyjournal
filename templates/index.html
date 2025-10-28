@@ -33,8 +33,7 @@
                 <h2>Add New Entry</h2>
                 <form hx-post="/entries" 
                       hx-target="#entries-list" 
-                      hx-swap="innerHTML"
-                      hx-on::after-request="this.reset()">
+                      hx-swap="innerHTML">
                     <div class="form-group">
                         <input type="text" 
                                name="title" 

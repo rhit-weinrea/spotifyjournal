@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from datetime import datetime
 
 app = Flask(__name__)
 
 # In-memory storage for journal entries (in a real app, use a database)
 journal_entries = []
+next_id = 1
 
 @app.route('/')
 def index():
@@ -19,16 +20,18 @@ def get_entries():
 @app.route('/entries', methods=['POST'])
 def add_entry():
     """HTMX endpoint to add a new journal entry"""
+    global next_id
     title = request.form.get('title', '')
     content = request.form.get('content', '')
     
     if title and content:
         entry = {
-            'id': len(journal_entries) + 1,
+            'id': next_id,
             'title': title,
             'content': content,
             'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         }
+        next_id += 1
         journal_entries.insert(0, entry)  # Add to beginning
         
     return render_template('partials/entries.html', entries=journal_entries)

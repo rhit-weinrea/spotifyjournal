@@ -49,10 +49,28 @@ pip install -r requirements.txt
 python app.py
 ```
 
-2. Open your browser and navigate to:
+2. For development with debug mode (WARNING: Never use in production):
+```bash
+FLASK_DEBUG=true python app.py
+```
+
+3. Open your browser and navigate to:
 ```
 http://localhost:5000
 ```
+
+## Production Deployment
+
+For production use:
+1. **Never enable debug mode** - it exposes sensitive information and allows code execution
+2. Use a production WSGI server like Gunicorn or uWSGI:
+```bash
+pip install gunicorn
+gunicorn app:app
+```
+3. Use a proper database instead of in-memory storage
+4. Use environment variables for configuration
+5. Enable HTTPS
 
 ## How It Works
 

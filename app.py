@@ -60,4 +60,8 @@ def search_entries():
     return render_template('partials/entries.html', entries=filtered_entries)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Debug mode should only be used in development
+    # In production, run with a proper WSGI server (gunicorn, uwsgi, etc.)
+    import os
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)

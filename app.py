@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 # In-memory storage for journal entries (in a real app, use a database)
 journal_entries = []
+# Simple counter for IDs - NOTE: not thread-safe, use database auto-increment in production
 next_id = 1
 
 @app.route('/')
